@@ -14,7 +14,9 @@ const Header: FC = () => {
                 <Search />
                 <nav>
                     <ButtonLink type="stroked" path="/collections">Коллекции</ButtonLink>
+                    <ButtonLink type="stroked" path="/pictures">Картинки</ButtonLink>
                 </nav>
+                <ButtonLink type="filled" path="/create">Создать</ButtonLink>
             </div>
         </Container>
       </header>
