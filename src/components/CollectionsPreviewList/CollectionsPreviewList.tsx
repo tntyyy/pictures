@@ -28,7 +28,7 @@ const CollectionsPreviewList: FC<CollectionsPreviewListProps> = ({items}) => {
             )}
         </div>
         <div className={styles.btnWrapper}>
-            <ButtonLink path="/collections" type="filled">Все</ButtonLink>
+            <ButtonLink path="/collections" type="filled">Показать все</ButtonLink>
         </div>
     </div>
   );

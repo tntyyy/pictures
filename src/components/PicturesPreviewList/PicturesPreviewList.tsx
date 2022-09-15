@@ -26,7 +26,7 @@ const PicturesPreviewList: FC<PicturesPreviewListProps> = ({items}) => {
               )}
           </div>
           <div className={styles.btnWrapper}>
-              <ButtonLink path="/pictures" type="filled">Все</ButtonLink>
+              <ButtonLink path="/pictures" type="filled">Показать все</ButtonLink>
           </div>
       </div>
   );
