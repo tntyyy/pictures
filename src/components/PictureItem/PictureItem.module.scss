@@ -1,0 +1,30 @@
+.item {
+  text-decoration: none;
+  cursor: pointer;
+
+  padding: 33px 0;
+  background: #F7F7F8;
+  border-radius: 16px;
+  flex: 1;
+
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 20px;
+  color: #6534FF;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+
+  p {
+    align-self: flex-start;
+    margin-left: 33px;
+  }
+
+  img {
+    border-radius: 16px;
+    width: 315px;
+    height: 250px;
+  }
+}

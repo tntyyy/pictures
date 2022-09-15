@@ -4,6 +4,7 @@ import {IPicture} from "types/pictures";
 import Title from "../Titile/Title";
 import {Link} from "react-router-dom";
 import ButtonLink from "../ButtonLink/ButtonLink";
+import PictureItem from "../PictureItem/PictureItem";
 
 interface PicturesPreviewListProps {
     items: IPicture[];
@@ -15,14 +16,13 @@ const PicturesPreviewList: FC<PicturesPreviewListProps> = ({items}) => {
           <Title>Последние картинки</Title>
           <div className={styles.wrapper}>
               {items.map(item =>
-                  <Link
-                      to="/pictures"
-                      key={item.id}
-                      className={styles.item}
-                  >
-                      <img src={item.path} alt={item.title}/>
-                      <p>{item.title}</p>
-                  </Link>
+                <PictureItem
+                    key={item.id}
+                    id={item.id}
+                    path={item.path}
+                    title={item.title}
+                    collection_id={item.collection_id}
+                />
               )}
           </div>
           <div className={styles.btnWrapper}>
