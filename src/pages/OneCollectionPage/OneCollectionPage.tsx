@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 import styles from './OneCollectionPage.module.scss';
-import Container from "../../components/Container/Container";
-import Title from "../../components/Titile/Title";
+import Container from "components/Container/Container";
+import Title from "components/Titile/Title";
 import {useParams} from "react-router-dom";
-import PicturesList from "../../components/PicturesList/PicturesList";
-import {IPicture} from "../../types/pictures";
+import PicturesList from "components/PicturesList/PicturesList";
+import {IPicture} from "types/pictures";
 
 const mockPictures: IPicture[] = [
     {id: 1, title: 'Lorem', path: 'https://stockmeier-food.ru/uploads/posts/2021-11/medium/1637312162_aromatizator-vanil.jpg', collection_id: 1},

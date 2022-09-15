@@ -1,8 +1,7 @@
 import React, { FC } from 'react';
 import styles from './PicturesList.module.scss';
-import CollectionItem from "../CollectionItem/CollectionItem";
-import {IPicture} from "../../types/pictures";
-import PictureItem from "../PictureItem/PictureItem";
+import {IPicture} from "types/pictures";
+import PictureItem from "components/PictureItem/PictureItem";
 
 interface PicturesListProps {
     items: IPicture[];
