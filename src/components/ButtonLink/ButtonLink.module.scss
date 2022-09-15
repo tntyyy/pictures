@@ -1,0 +1,18 @@
+.button {
+  padding: 12px 30px;
+  text-decoration: none;
+  font-weight: 500;
+  border-radius: 16px;
+}
+
+.filled {
+  background: rgba(101, 52, 255, 1);
+  border: 1px solid rgba(101, 52, 255, 1);
+  color: var(--white-color);
+}
+
+.stroked {
+  background: #F7F7F8;
+  border: 1px solid #6534FF;
+  color: var(--purple-color);
+}
