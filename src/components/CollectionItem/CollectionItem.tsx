@@ -7,7 +7,7 @@ import {ICollection} from "types/collections";
 const CollectionItem: FC<ICollection> = ({id, title, description}) => {
   return (
       <Link
-          to="/collections"
+          to={`/collections/${id}`}
           className={styles.item}
       >
           <p>{title}</p>

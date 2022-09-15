@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import styles from './PicturesPreviewList.module.scss';
 import {IPicture} from "types/pictures";
 import Title from "../Titile/Title";
-import {Link} from "react-router-dom";
 import ButtonLink from "../ButtonLink/ButtonLink";
 import PictureItem from "../PictureItem/PictureItem";
 
