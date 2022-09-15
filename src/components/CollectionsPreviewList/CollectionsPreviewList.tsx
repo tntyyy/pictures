@@ -6,7 +6,7 @@ import Title from "components/Titile/Title";
 import ButtonLink from "components/ButtonLink/ButtonLink";
 
 import styles from './CollectionsPreviewList.module.scss';
-import {Link} from "react-router-dom";
+import CollectionItem from "components/CollectionItem/CollectionItem";
 
 interface CollectionsPreviewListProps {
     items: ICollection[];
@@ -18,13 +18,12 @@ const CollectionsPreviewList: FC<CollectionsPreviewListProps> = ({items}) => {
         <Title>Последние коллекции</Title>
         <div className={styles.wrapper}>
             {items.map(item =>
-                <Link
-                    to="/collections"
+                <CollectionItem
                     key={item.id}
-                    className={styles.item}
-                >
-                    <p>{item.title}</p>
-                </Link>
+                    id={item.id}
+                    title={item.title}
+                    description={item.description}
+                />
             )}
         </div>
         <div className={styles.btnWrapper}>
