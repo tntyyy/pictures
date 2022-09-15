@@ -22,8 +22,10 @@ const MainPage: FC = () => {
   return (
       <main className={styles.main}>
         <Container>
-            <CollectionsPreviewList items={mockCollections}/>
-            <PicturesPreviewList items={mockPictures}/>
+            <div className={styles.wrapper}>
+                <CollectionsPreviewList items={mockCollections}/>
+                <PicturesPreviewList items={mockPictures}/>
+            </div>
         </Container>
       </main>
   );
