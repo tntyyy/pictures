@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import styles from './FormCollection.module.scss';
 import {useForm} from "react-hook-form";
-import cn from 'classnames';
 
 interface IFormValues {
     name: string,
