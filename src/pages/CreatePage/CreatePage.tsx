@@ -3,6 +3,7 @@ import cn from 'classnames';
 import styles from './CreatePage.module.scss';
 import Container from "components/Container/Container";
 import Title from "components/Titile/Title";
+import FormCollection from "components/FormCollection/FormCollection";
 
 const CreatePage: FC = () => {
     const [picture, setIsPicture] = useState<boolean>(false);
@@ -26,6 +27,7 @@ const CreatePage: FC = () => {
                           Коллекцию
                       </button>
                   </div>
+                  {picture ? <h1>Pic</h1> : <FormCollection/>}
               </div>
           </Container>
       </main>
