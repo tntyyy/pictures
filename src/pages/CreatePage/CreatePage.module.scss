@@ -1,0 +1,25 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  padding-top: 40px;
+}
+
+.button {
+  padding: 12px 30px;
+  text-decoration: none;
+  font-weight: 500;
+  border-radius: 16px;
+  background: #F7F7F8;
+  border: 1px solid #6534FF;
+  color: var(--purple-color);
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+}
+
+.filled {
+  background: rgba(101, 52, 255, 1);
+  border: 1px solid rgba(101, 52, 255, 1);
+  color: var(--white-color);
+}
