@@ -1,6 +1,8 @@
-import React, { FC } from 'react';
+import React, {FC, useEffect} from 'react';
 import styles from './FormPicture.module.scss';
 import {useForm} from "react-hook-form";
+import {useTypedSelector} from "../../hooks/useTypedSelector";
+import {useActions} from "../../hooks/useActions";
 
 interface IFormValues {
     title: string,
@@ -15,6 +17,14 @@ const FormPicture: FC = () => {
         console.log(data);
         reset();
     }
+
+    const {collections} = useTypedSelector(state => state.collections);
+    const {getCollections} = useActions();
+
+    useEffect(() => {
+        getCollections();
+    }, []);
+
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -44,10 +54,9 @@ const FormPicture: FC = () => {
             
             <div>
                 <select {...register("collection_id", { required: true })}>
-                    <option value="1">Anime</option>
-                    <option value="2">Test 2</option>
-                    <option value="3">Test 3</option>
-                    <option value="4">Test 4</option>
+                    {collections.map(collection =>
+                        <option key={collection.id} value={collection.id}>{collection.title}</option>
+                    )}
                 </select>
             </div>
             <button className={styles.btn} type="submit">Создать</button>
