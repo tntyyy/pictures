@@ -4,9 +4,9 @@ import Container from "components/Container/Container";
 import Title from "components/Titile/Title";
 import {useParams} from "react-router-dom";
 import PicturesList from "components/PicturesList/PicturesList";
-import {IPicture} from "types/pictures";
 import {useTypedSelector} from "hooks/useTypedSelector";
 import {useActions} from "hooks/useActions";
+import Spinner from "components/Spinner/Spinner";
 
 const OneCollectionPage: FC = () => {
     const {id} = useParams();
@@ -19,7 +19,7 @@ const OneCollectionPage: FC = () => {
     }, []);
 
     if (loading) {
-        return (<h1>Загрузка</h1>)
+        return (<Spinner />)
     }
 
     if (error) {

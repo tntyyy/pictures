@@ -5,6 +5,7 @@ import Title from "components/Titile/Title";
 import PicturesList from "components/PicturesList/PicturesList";
 import {useTypedSelector} from "hooks/useTypedSelector";
 import {useActions} from "hooks/useActions";
+import Spinner from "components/Spinner/Spinner";
 
 const PicturesPage: FC = () => {
     const {pictures, loading, error} = useTypedSelector(state => state.pictures);
@@ -15,11 +16,11 @@ const PicturesPage: FC = () => {
     }, []);
 
     if (loading) {
-        return <h1>Загрузка</h1> //todo изменить на спиннер
+        return (<Spinner/>)
     }
 
     if (error) {
-        return <h1>Ошибка</h1> //todo изменить на спиннер
+        return <h1>Ошибка</h1>
     }
 
   return (
