@@ -21,13 +21,20 @@ export const getPictures = () => {
     }
 }
 
-export const getPicturesByCollection = () => {
+export const getPicturesByCollection = (id: number) => {
     return async (dispatch: Dispatch<PicturesActions>) => {
         try {
             dispatch({type: PicturesActionTypes.FETCH_PICTURES});
-            const response = await axios.get('http://localhost:8080/api/pictures-in-collection/1');
+            const response = await axios.get(`${BASE_URL}${pictureEndpoints.PICTURES_IN_COLLECTION}/${id}`);
+            dispatch({
+                type: PicturesActionTypes.FETCH_PICTURES_SUCCESS,
+                payload: response.data
+            });
         } catch (e) {
-
+            dispatch({
+                type: PicturesActionTypes.FETCH_PICTURES_ERROR,
+                payload: "Произошла ошибка при загрузке картинок"
+            })
         }
     }
 }
