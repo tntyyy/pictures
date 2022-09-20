@@ -16,18 +16,22 @@ const mockCollections: ICollection[] = [
 
 const MainPage: FC = () => {
     const {pictures, error: pictureError, loading: pictureLoading} = useTypedSelector(state => state.pictures);
-    const {getPictures} = useActions();
+    const {getPictures, getCollections} = useActions();
+
+    const {collections, error: collectionsError, loading: collectionLoading} = useTypedSelector(state => state.collections);
 
     useEffect(() => {
         getPictures();
+        getCollections();
     }, []);
 
-    if (pictureLoading) {
+    if (pictureLoading || collectionLoading) {
         return (<Spinner/>)
     }
 
 
-    if (pictureError) {
+    if (pictureError || collectionsError) {
+        console.log(collectionsError);
         return (<h1>Произошла ошибка</h1>)
     }
 
@@ -35,7 +39,7 @@ const MainPage: FC = () => {
       <main className={styles.main}>
         <Container>
             <div className={styles.wrapper}>
-                <CollectionsPreviewList items={mockCollections}/>
+                <CollectionsPreviewList items={collections.slice(-3).reverse()}/>
                 <PicturesPreviewList items={pictures.slice(-3).reverse()}/>
             </div>
         </Container>

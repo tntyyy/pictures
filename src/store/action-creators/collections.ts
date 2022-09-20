@@ -9,7 +9,7 @@ export const getCollections = () => {
     return async (dispatch: Dispatch<CollectionsActions>) => {
         try {
             dispatch({ type: CollectionsActionTypes.FETCH_COLLECTIONS });
-            const response = await axios.get("http://localhost:8080/api/collections");
+            const response = await axios.get("http://localhost:8080/api/collection");
             dispatch({
                 type: CollectionsActionTypes.FETCH_COLLECTIONS_SUCCESS,
                 payload: response.data,
