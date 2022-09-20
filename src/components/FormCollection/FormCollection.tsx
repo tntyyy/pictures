@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import styles from './FormCollection.module.scss';
 import {useForm} from "react-hook-form";
+import {useActions} from "hooks/useActions";
 
 interface IFormValues {
     name: string,
@@ -8,10 +9,12 @@ interface IFormValues {
 }
 
 const FormCollection: FC = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm<IFormValues>();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm<IFormValues>();
+    const {createCollection} = useActions();
 
     const onSubmit = (data: any) => {
-        console.log(data);
+        createCollection(data.name, data.description);
+        reset();
     }
 
   return (
