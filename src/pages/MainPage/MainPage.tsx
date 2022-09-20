@@ -25,7 +25,7 @@ const MainPage: FC = () => {
         <Container>
             <div className={styles.wrapper}>
                 <CollectionsPreviewList items={mockCollections}/>
-                <PicturesPreviewList items={pictures.slice(0, 3)}/>
+                <PicturesPreviewList items={pictures.slice(-3).reverse()}/>
             </div>
         </Container>
       </main>
