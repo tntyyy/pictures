@@ -20,7 +20,7 @@
   margin: 8px;
   border: 8px solid var(--purple-color);
   border-radius: 50%;
-  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  animation: ldsRing 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
   border-color: var(--purple-color) transparent transparent transparent;
 }
 .ldsRing div:nth-child(1) {

@@ -6,6 +6,7 @@ import {ICollection} from "types/collections";
 import PicturesPreviewList from "components/PicturesPreviewList/PicturesPreviewList";
 import {useTypedSelector} from "hooks/useTypedSelector";
 import {useActions} from "hooks/useActions";
+import Spinner from "../../components/Spinner/Spinner";
 
 const mockCollections: ICollection[] = [
     {id: 1, title: 'Anime', description: 'fsdgsd'},
@@ -14,12 +15,22 @@ const mockCollections: ICollection[] = [
 ];
 
 const MainPage: FC = () => {
-    const {pictures, error, loading} = useTypedSelector(state => state.pictures);
+    const {pictures, error: pictureError, loading: pictureLoading} = useTypedSelector(state => state.pictures);
     const {getPictures} = useActions();
 
     useEffect(() => {
         getPictures();
     }, []);
+
+    if (pictureLoading) {
+        return (<Spinner/>)
+    }
+
+
+    if (pictureError) {
+        return (<h1>Произошла ошибка</h1>)
+    }
+
   return (
       <main className={styles.main}>
         <Container>
