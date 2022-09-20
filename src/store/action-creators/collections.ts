@@ -4,12 +4,13 @@ import {
     CollectionsActionTypes,
 } from "types/collections";
 import axios from "axios";
+import {BASE_URL, collectionsEndpoint} from "constants/api";
 
 export const getCollections = () => {
     return async (dispatch: Dispatch<CollectionsActions>) => {
         try {
             dispatch({ type: CollectionsActionTypes.FETCH_COLLECTIONS });
-            const response = await axios.get("http://localhost:8080/api/collections");
+            const response = await axios.get(`${BASE_URL}${collectionsEndpoint.COLLECTION}`);
             dispatch({
                 type: CollectionsActionTypes.FETCH_COLLECTIONS_SUCCESS,
                 payload: response.data,
