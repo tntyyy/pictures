@@ -21,7 +21,7 @@ export const getPictures = () => {
     }
 }
 
-export const getPicturesByCollection = (id: number) => {
+export const getPicturesByCollection = (id: string | undefined) => {
     return async (dispatch: Dispatch<PicturesActions>) => {
         try {
             dispatch({type: PicturesActionTypes.FETCH_PICTURES});
