@@ -4,3 +4,7 @@ export enum pictureEndpoints {
     PICTURES = 'pictures',
     PICTURES_IN_COLLECTION = 'pictures-in-collection'
 }
+
+export enum collectionsEndpoint {
+    COLLECTION = 'collection'
+}
