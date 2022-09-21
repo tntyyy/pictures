@@ -9,10 +9,24 @@
   background: rgba(101, 52, 255, 1);
   border: 1px solid rgba(101, 52, 255, 1);
   color: var(--white-color);
+  position: relative;
+  z-index: 0;
+
+  &:hover {
+    color: var(--purple-color);
+    background: #F7F7F8;
+    transition: all .3s ease;
+  }
 }
 
 .stroked {
   background: #F7F7F8;
   border: 1px solid #6534FF;
   color: var(--purple-color);
+
+  &:hover {
+    color: var(--white-color);
+    background: rgba(101, 52, 255, 1);
+    transition: all .3s ease;
+  }
 }
