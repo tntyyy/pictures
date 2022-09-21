@@ -14,12 +14,12 @@ const FormPicture: FC = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm<IFormValues>();
 
     const onSubmit = (data: any) => {
-        console.log(data);
+        createPicture(data.title, data.path, data.collection_id);
         reset();
     }
 
     const {collections} = useTypedSelector(state => state.collections);
-    const {getCollections} = useActions();
+    const {getCollections, createPicture} = useActions();
 
     useEffect(() => {
         getCollections();
@@ -31,7 +31,7 @@ const FormPicture: FC = () => {
             <div>
                 <input
                     type="text"
-                    placeholder="Название коллекции"
+                    placeholder="Название картинки"
                     {...register("title", {required: true, maxLength: 20})}
                     className={errors.title ? styles.errorInput : ''}
                 />
@@ -43,7 +43,7 @@ const FormPicture: FC = () => {
             <div>
                 <input
                     type="text"
-                    placeholder="Описание коллекции"
+                    placeholder="Ссылка на картинку"
                     {...register("path", {required: true})}
                     className={errors.path ? styles.errorInput : ''}
                 />

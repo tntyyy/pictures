@@ -38,3 +38,25 @@ export const getPicturesByCollection = (id: string | undefined) => {
         }
     }
 }
+
+export const createPicture = (title: string | undefined, path: string | undefined, collection_id: string | undefined) => {
+    return async (dispatch: Dispatch<PicturesActions>) => {
+        try {
+            dispatch({type: PicturesActionTypes.FETCH_PICTURES});
+            const response = await axios.post(`${BASE_URL}${pictureEndpoints.PICTURES}`, {
+                "title": title,
+                "path": path,
+                "collection_id": collection_id
+            });
+            dispatch({
+                type: PicturesActionTypes.FETCH_PICTURES_SUCCESS,
+                payload: response.data
+            });
+        } catch (e) {
+            dispatch({
+                type: PicturesActionTypes.FETCH_PICTURES_ERROR,
+                payload: "Произошла ошибка при создании картинки"
+            })
+        }
+    }
+}
