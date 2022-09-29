@@ -86,3 +86,50 @@ select:focus {
     padding-left: 10px;
   }
 }
+
+.inputFile {
+  position: relative;
+  display: inline-block;
+}
+.inputFile span {
+  width: 240px;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  outline: none;
+  text-decoration: none;
+  font-size: var(--fs-small);
+  vertical-align: middle;
+  color: var(--white-color);
+  text-align: center;
+  border-radius: 8px;
+  background-color: var(--purple-color);
+  line-height: 22px;
+  height: 40px;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  border: none;
+  margin: 0;
+  transition: background-color 0.2s;
+}
+.inputFile input[type=file] {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+  display: block;
+  width: 0;
+  height: 0;
+}
+
+/* Focus */
+.inputFile input[type=file]:focus + span {
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+/* Hover/active */
+.inputFile:hover span {
+  background-color: #3910bd;
+}
+.inputFile:active span {
+  background-color: #7147ff;
+}

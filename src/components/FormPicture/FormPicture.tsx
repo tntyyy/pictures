@@ -1,4 +1,5 @@
-import React, {FC, useEffect} from 'react';
+import React, {FC, useEffect, useRef, useState} from 'react';
+import cn from 'classnames';
 import styles from './FormPicture.module.scss';
 import {useForm} from "react-hook-form";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
@@ -12,10 +13,19 @@ interface IFormValues {
 
 const FormPicture: FC = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm<IFormValues>();
+    const [fileName, setFileName] = useState<string>('Выберите файл');
+    const inputFile = useRef<HTMLInputElement | null>(null);
+    const {ref, ...rest} = register("path", {required: true});
 
     const onSubmit = (data: any) => {
         createPicture(data.title, data.path, data.collection_id);
         reset();
+    }
+
+    const setInputFileName = () => {
+        if (inputFile && inputFile.current && inputFile.current.files) {
+            setFileName((inputFile.current.files[0].name));
+        }
     }
 
     const {collections} = useTypedSelector(state => state.collections);
@@ -41,12 +51,18 @@ const FormPicture: FC = () => {
             </div>
 
             <div>
-                <input
-                    type="text"
-                    placeholder="Ссылка на картинку"
-                    {...register("path", {required: true})}
-                    className={errors.path ? styles.errorInput : ''}
-                />
+                <label className={styles.inputFile}>
+                    <input
+                        type="file"
+                        {...rest}
+                        ref={(e) => {
+                            ref(e);
+                            inputFile.current = e
+                        }}
+                        onChange={() => setInputFileName()}
+                    />
+                        <span>{fileName}</span>
+                </label>
                 <div className={styles.errors}>
                     {errors.path?.type === "required" && <span>Поле должно быть заполнено</span>}
                 </div>
