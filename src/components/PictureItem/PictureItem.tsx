@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 
 
 const PictureItem: FC<IPicture> = ({id, title, path, collection_id}) => {
+    console.log(path);
   return (
       <Link
           to="/pictures"

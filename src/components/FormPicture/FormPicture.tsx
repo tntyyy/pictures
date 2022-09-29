@@ -16,14 +16,8 @@ const FormPicture: FC = () => {
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm<IFormValues>();
     const inputFile = useRef<HTMLInputElement | null>(null);
-    const {ref, ...rest} = register("path", {required: true});
-
     const [fileName, setFileName] = useState<string>('Выберите файл');
 
-    const onSubmit = (data: any) => {
-        createPicture(data.title, data.path, data.collection_id);
-        reset();
-    }
 
     const setInputFileName = () => {
         if (inputFile && inputFile.current && inputFile.current.files) {
@@ -34,6 +28,31 @@ const FormPicture: FC = () => {
     useEffect(() => {
         getCollections();
     }, []);
+
+    const onSubmit = async (data: any) => {
+        const picture = {
+            title: data.title,
+            path: '',
+            collection_id: data.collection_id
+        }
+
+        if (inputFile && inputFile.current && inputFile.current.files) {
+            const file = inputFile.current?.files[0];
+            const reader = new FileReader();
+            // @ts-ignore
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+
+            reader.addEventListener('load', async () => {
+                // @ts-ignore
+                picture.path = await reader.result;
+                console.log(picture);
+                createPicture(picture.title, picture.path, picture.collection_id);
+            })
+        }
+        reset();
+    }
 
 
     return (
@@ -54,11 +73,7 @@ const FormPicture: FC = () => {
                 <label className={styles.inputFile}>
                     <input
                         type="file"
-                        {...rest}
-                        ref={(e) => {
-                            ref(e);
-                            inputFile.current = e
-                        }}
+                        ref={inputFile}
                         onChange={() => setInputFileName()}
                     />
                         <span>{fileName}</span>
