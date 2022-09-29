@@ -3,6 +3,7 @@ import styles from './FormPicture.module.scss';
 import {useForm} from "react-hook-form";
 import {useTypedSelector} from "hooks/useTypedSelector";
 import {useActions} from "hooks/useActions";
+import {postPicture} from "api";
 
 interface IFormValues {
     title: string,
@@ -12,7 +13,7 @@ interface IFormValues {
 
 const FormPicture: FC = () => {
     const {collections} = useTypedSelector(state => state.collections);
-    const {getCollections, createPicture} = useActions();
+    const {getCollections} = useActions();
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm<IFormValues>();
     const inputFile = useRef<HTMLInputElement | null>(null);
@@ -47,8 +48,7 @@ const FormPicture: FC = () => {
             reader.addEventListener('load', async () => {
                 // @ts-ignore
                 picture.path = await reader.result;
-                console.log(picture);
-                createPicture(picture.title, picture.path, picture.collection_id);
+                await postPicture(picture.title, picture.path, picture.collection_id);
             })
         }
         reset();
