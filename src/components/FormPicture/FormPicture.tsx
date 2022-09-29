@@ -3,7 +3,7 @@ import styles from './FormPicture.module.scss';
 import {useForm} from "react-hook-form";
 import {useTypedSelector} from "hooks/useTypedSelector";
 import {useActions} from "hooks/useActions";
-import {postPicture} from "api";
+import {postPicture} from "../../api";
 
 interface IFormValues {
     title: string,

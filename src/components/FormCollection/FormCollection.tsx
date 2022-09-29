@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styles from './FormCollection.module.scss';
 import {useForm} from "react-hook-form";
-import {postCollection} from "api";
+import {postCollection} from "../../api";
 
 interface IFormValues {
     name: string,
