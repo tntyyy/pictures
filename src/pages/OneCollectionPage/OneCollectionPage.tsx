@@ -32,7 +32,7 @@ const OneCollectionPage: FC = () => {
               <div className={styles.wrapper}>
                   <Title>Коллекция номер: {id}</Title>
                   <PicturesList
-                    items={pictures}
+                    items={pictures.reverse()}
                   />
               </div>
           </Container>
