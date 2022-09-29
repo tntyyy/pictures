@@ -1,9 +1,8 @@
 import React, {FC, useEffect, useRef, useState} from 'react';
-import cn from 'classnames';
 import styles from './FormPicture.module.scss';
 import {useForm} from "react-hook-form";
-import {useTypedSelector} from "../../hooks/useTypedSelector";
-import {useActions} from "../../hooks/useActions";
+import {useTypedSelector} from "hooks/useTypedSelector";
+import {useActions} from "hooks/useActions";
 
 interface IFormValues {
     title: string,
@@ -12,10 +11,14 @@ interface IFormValues {
 }
 
 const FormPicture: FC = () => {
+    const {collections} = useTypedSelector(state => state.collections);
+    const {getCollections, createPicture} = useActions();
+
     const { register, handleSubmit, reset, formState: { errors } } = useForm<IFormValues>();
-    const [fileName, setFileName] = useState<string>('Выберите файл');
     const inputFile = useRef<HTMLInputElement | null>(null);
     const {ref, ...rest} = register("path", {required: true});
+
+    const [fileName, setFileName] = useState<string>('Выберите файл');
 
     const onSubmit = (data: any) => {
         createPicture(data.title, data.path, data.collection_id);
@@ -27,9 +30,6 @@ const FormPicture: FC = () => {
             setFileName((inputFile.current.files[0].name));
         }
     }
-
-    const {collections} = useTypedSelector(state => state.collections);
-    const {getCollections, createPicture} = useActions();
 
     useEffect(() => {
         getCollections();
