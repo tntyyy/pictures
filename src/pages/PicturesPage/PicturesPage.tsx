@@ -28,7 +28,7 @@ const PicturesPage: FC = () => {
         <Container>
           <div className={styles.wrapper}>
             <Title>Все картинки</Title>
-            <PicturesList items={pictures}/>
+            <PicturesList items={pictures.reverse()}/>
           </div>
         </Container>
       </main>

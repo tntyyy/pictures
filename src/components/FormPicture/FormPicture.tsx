@@ -1,8 +1,9 @@
-import React, {FC, useEffect} from 'react';
+import React, {FC, useEffect, useRef, useState} from 'react';
 import styles from './FormPicture.module.scss';
 import {useForm} from "react-hook-form";
-import {useTypedSelector} from "../../hooks/useTypedSelector";
-import {useActions} from "../../hooks/useActions";
+import {useTypedSelector} from "hooks/useTypedSelector";
+import {useActions} from "hooks/useActions";
+import {postPicture} from "api";
 
 interface IFormValues {
     title: string,
@@ -11,19 +12,47 @@ interface IFormValues {
 }
 
 const FormPicture: FC = () => {
-    const { register, handleSubmit, reset, formState: { errors } } = useForm<IFormValues>();
-
-    const onSubmit = (data: any) => {
-        createPicture(data.title, data.path, data.collection_id);
-        reset();
-    }
-
     const {collections} = useTypedSelector(state => state.collections);
-    const {getCollections, createPicture} = useActions();
+    const {getCollections} = useActions();
+
+    const { register, handleSubmit, reset, formState: { errors } } = useForm<IFormValues>();
+    const inputFile = useRef<HTMLInputElement | null>(null);
+    const [fileName, setFileName] = useState<string>('Выберите файл');
+
+
+    const setInputFileName = () => {
+        if (inputFile && inputFile.current && inputFile.current.files) {
+            setFileName((inputFile.current.files[0].name));
+        }
+    }
 
     useEffect(() => {
         getCollections();
     }, []);
+
+    const onSubmit = async (data: any) => {
+        const picture = {
+            title: data.title,
+            path: '',
+            collection_id: data.collection_id
+        }
+
+        if (inputFile && inputFile.current && inputFile.current.files) {
+            const file = inputFile.current?.files[0];
+            const reader = new FileReader();
+            // @ts-ignore
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+
+            reader.addEventListener('load', async () => {
+                // @ts-ignore
+                picture.path = await reader.result;
+                await postPicture(picture.title, picture.path, picture.collection_id);
+            })
+        }
+        reset();
+    }
 
 
     return (
@@ -41,12 +70,14 @@ const FormPicture: FC = () => {
             </div>
 
             <div>
-                <input
-                    type="text"
-                    placeholder="Ссылка на картинку"
-                    {...register("path", {required: true})}
-                    className={errors.path ? styles.errorInput : ''}
-                />
+                <label className={styles.inputFile}>
+                    <input
+                        type="file"
+                        ref={inputFile}
+                        onChange={() => setInputFileName()}
+                    />
+                        <span>{fileName}</span>
+                </label>
                 <div className={styles.errors}>
                     {errors.path?.type === "required" && <span>Поле должно быть заполнено</span>}
                 </div>
